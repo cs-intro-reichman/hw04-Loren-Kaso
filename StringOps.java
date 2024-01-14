@@ -22,21 +22,92 @@ public class StringOps {
     //////                                               ///////
     ////////////////////////////////////////////////////////////
     public static void main(String[] args) {
+    //     System.out.println(camelCase("Hello World"));
+    // System.out.println(capVowelsLowRest("Hello World")); // “hEllO wOrld”;
+    // System.out.println(capVowelsLowRest("One two tHRee world")); // “OnE twO thrEE wOrld”;
+    // System.out.println(capVowelsLowRest("vowels are fun")); // “vOwEls ArE fUn”;
+    // System.out.println(capVowelsLowRest("intro")); // “IntrO”;
+    // System.out.println(capVowelsLowRest("yellow"));
         
+    println(allIndexOf("Hello world",'l')); // output: {2, 3, 9}
+    // allIndexOf("Hello worLd",'l'); // output: {2, 3}
+    // allIndexOf("Hello world",'o'); // output: {4, 7}
+    // allIndexOf("Hello world",' '); // output: {5}
+    // allIndexOf("Hello world",'d'); // output: {10}
+    // allIndexOf("MMMM",'M'); 
     }
 
     public static String capVowelsLowRest (String string) {
-        // Write your code here:
-        return "";
+        String vowelStrLow = ""; 
+        String lowerLetter = camelCase(string);
+        for (int i = 0; i < lowerLetter.length(); i++) {
+            if(isVowel(lowerLetter.charAt(i))){
+                vowelStrLow += (char)(lowerLetter.charAt(i) - 32);
+            }else{
+                vowelStrLow += (char)(lowerLetter.charAt(i));
+            }
+        }
+        return vowelStrLow;
     }
 
+
+    /*** Helper function ***/
+    public static boolean isVowel (char ch){
+        boolean vowel;
+        vowel = ch == 'a' ||ch == 'i'||ch == 'u' || ch == 'o' ||ch == 'e' ||
+                ch == 'A' ||ch == 'I'||ch == 'U' || ch == 'O' ||ch == 'E' ? true : false;
+        return vowel;
+     }
+
+     public static boolean isLetter (char ch){
+        boolean letter;
+        letter = (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') ? true : false;
+        return letter;
+     }
+     /********************************************************************************/
+
     public static String camelCase (String string) {
-        // Write your code here:
-        return "";
+        String camelStr = ""; 
+        for (int i = 0; i < string.length(); i++) {
+            if (string.charAt(i) >= 'A' && string.charAt(i) <= 'Z'){
+                camelStr += (char)(string.charAt(i) + 32); 
+            }else{
+                camelStr += string.charAt(i);
+            }
+        }
+        return camelStr;
     }
 
     public static int[] allIndexOf (String string, char chr) {
         // Write your code here:
-        return new int[1];
+        int letterShow = countLetter(string, chr);
+        int [] indexLettr = new int[letterShow]; 
+        int itr = 0;
+        for (int i = 0; i < string.length(); i++) {
+            if(string.charAt(i) == chr){
+                indexLettr[itr] = i;
+                itr++;
+            }
+        }
+        return indexLettr;
+    }
+
+    public static int countLetter(String str , char ch){
+        int count = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if(str.charAt(i) == ch){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /*** print array helper function ***/
+    public static void println(int [] arr){
+        System.out.print("{" + arr[0]);
+        for (int i = 1; i < arr.length; i++) {
+            System.out.print(", " + arr[i]);
+        }
+        System.out.println("}");
     }
 }
