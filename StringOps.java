@@ -22,7 +22,7 @@ public class StringOps {
     //////                                               ///////
     ////////////////////////////////////////////////////////////
     public static void main(String[] args) {
-    //     System.out.println(camelCase("Hello World"));
+        System.out.println(camelCase("Hello World"));
     // System.out.println(capVowelsLowRest("Hello World")); // “hEllO wOrld”;
     // System.out.println(capVowelsLowRest("One two tHRee world")); // “OnE twO thrEE wOrld”;
     // System.out.println(capVowelsLowRest("vowels are fun")); // “vOwEls ArE fUn”;
@@ -39,7 +39,7 @@ public class StringOps {
 
     public static String capVowelsLowRest (String string) {
         String vowelStrLow = ""; 
-        String lowerLetter = camelCase(string);
+        String lowerLetter = camelCaseWithSpace(string);
         for (int i = 0; i < lowerLetter.length(); i++) {
             if(isVowel(lowerLetter.charAt(i))){
                 vowelStrLow += (char)(lowerLetter.charAt(i) - 32);
@@ -59,14 +59,7 @@ public class StringOps {
         return vowel;
      }
 
-     public static boolean isLetter (char ch){
-        boolean letter;
-        letter = (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') ? true : false;
-        return letter;
-     }
-     /********************************************************************************/
-
-    public static String camelCase (String string) {
+     public static String camelCaseWithSpace(String string) {
         String camelStr = ""; 
         for (int i = 0; i < string.length(); i++) {
             if (string.charAt(i) >= 'A' && string.charAt(i) <= 'Z'){
@@ -75,6 +68,22 @@ public class StringOps {
                 camelStr += string.charAt(i);
             }
         }
+        return camelStr;
+    }
+     /********************************************************************************/
+
+    public static String camelCase(String string) {
+        String camelStr = "";
+        String nString = camelCaseWithSpace(string);
+        if(nString.charAt(0) !=' ')
+            camelStr += nString.charAt(0);
+        for (int i = 1; i < nString.length(); i++) {
+            if(nString.charAt(i - 1) == ' ' && nString.charAt(i)!=' ' &&camelStr.length() > 0){
+                 camelStr += (char)(nString.charAt(i) - 32);
+            }else if (nString.charAt(i) != ' '){
+                camelStr += nString.charAt(i);
+            }
+            }
         return camelStr;
     }
 
